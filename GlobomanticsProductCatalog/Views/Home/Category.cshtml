@@ -1,0 +1,44 @@
+﻿@using GlobomanticsProductCatalog.Controllers;
+@model GlobomanticsProductCatalog.Data.Category
+@{
+    ViewData["Title"] = "Category";
+}
+
+<style>
+    .product-panel {
+        display: inline-block;
+        width: 30%;
+        margin-right: 3%;
+    }
+
+    .product-panel .panel-body {
+        min-height: 240px
+    }
+
+    .ml-1 {
+        margin-left: 1rem !important;
+    }
+</style>
+
+<h2>@Model.Name</h2>
+
+@foreach (var product in Model.Products)
+{
+<div class="panel panel-default product-panel">
+    <div class="panel-heading">@product.Name</div>
+    <div class="panel-body">
+        <h4>About the Book</h4>
+        <p>@product.Description</p>
+    </div>
+    <div class="panel-footer text-right">
+        <form asp-action="Order" asp-controller="Home" method="post">
+            @product.Price.ToString("C")
+            <input type="hidden" name="@nameof(OrderForm.ProductId)" value="@product.Id" />
+            <button type="submit" class="btn btn-primary ml-1">Buy it!</button>
+        </form>
+        
+    </div>
+</div>
+}
+
+

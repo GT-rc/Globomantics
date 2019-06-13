@@ -1,0 +1,13 @@
+﻿@model GlobomanticsProductCatalog.Data.Category[]
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2>Welcome to the Globomantics Book store!</h2>
+<p class="lead">Please choose a category to begin shopping.</p>
+@foreach (var category in Model)
+{
+    <p>
+        <a asp-action="Category" asp-controller="Home" asp-route-id="@category.Id">@category.Name</a>
+    </p>
+}
